@@ -1,14 +1,7 @@
-const express = require("express");
+const express = require('express')
+const app = express()
+const port = 3000
 
-const PORT = 8080;
-const HOST = "0.0.0.0";
+app.get('/', (req, res) => res.send('Hello World!'))
 
-const app = express();
-
-app.get("/", (req, res) => {
-  res.send("Hello from Node.js app \n");
-});
-
-app.listen(PORT, HOST, () => {
-  console.log(`Running on http://${HOST}:${PORT}`);
-});
+app.listen(port, () => console.log(`Example app listening on port ${port}!`))
