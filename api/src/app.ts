@@ -1,11 +1,18 @@
 import express from 'express';
 import { resolve } from 'path';
 import { config } from 'dotenv';
+import bodyParser from 'body-parser';
 
-console.log(config({ path: resolve(__dirname, "../.env") }));
+import { user } from './routes';
+
+config({ path: resolve(__dirname, "../.env") });
 
 const app = express();
 const port = process.env.API_PORT;
-// bodyparser
-app.get('/', (request: express.Request, response: express.Response) => response.send('Hello World!'));
+
+app.use(bodyParser.json());
+
+app.use('/user', user );
+
+app.get('/', (req: express.Request, res: express.Response) => res.send('API is running...'));
 app.listen(port, () => console.log(`App is listening on port ${port}`));
