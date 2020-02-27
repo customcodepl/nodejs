@@ -4,7 +4,7 @@
   "description": "NodeJS upskill",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node-dev ./src/app.ts",
+    "start": "ts-node-dev ./src/server.ts",
     "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -16,8 +16,8 @@
   "author": "m.maciorowski@csutomcode.pl",
   "license": "ISC",
   "dependencies": {
-    "body-parser": "^1.19.0",
     "dotenv": "^8.2.0",
+    "envalid": "^6.0.1",
     "express": "^4.17.1"
   },
   "devDependencies": {

@@ -1,18 +1,31 @@
-import express from 'express';
-import { resolve } from 'path';
-import { config } from 'dotenv';
-import bodyParser from 'body-parser';
+import express, { Application, urlencoded } from 'express';
+import Controller from './controllers/controller.abstract';
 
-import { user } from './routes';
+class App {
+    private app: Application;
+    private port: number;
 
-config({ path: resolve(__dirname, "../.env") });
+    constructor(controllers: Controller[], port: number) {
+        this.app = express();
+        this.port = port;
 
-const app = express();
-const port = process.env.API_PORT;
+        this.initMiddlewares();
+        this.initControllers(controllers);
+    }
 
-app.use(bodyParser.json());
+    private initMiddlewares() {
+        this.app.use(urlencoded({ extended: true}));
+    }
 
-app.use('/user', user );
+    private initControllers(controllers: Controller[]) {
+        controllers.forEach(controller => { this.app.use('/', controller.router) })
+    }
 
-app.get('/', (req: express.Request, res: express.Response) => res.send('API is running...'));
-app.listen(port, () => console.log(`App is listening on port ${port}`));
+    public listen() {
+        this.app.listen(this.port, () => {
+            console.log(`App listening on the port ${this.port}`);
+        })
+    }
+}
+
+export default App;
