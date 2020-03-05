@@ -16,8 +16,10 @@
   "author": "m.maciorowski@csutomcode.pl",
   "license": "ISC",
   "dependencies": {
+    "@types/mongoose": "^5.7.3",
     "dotenv": "^8.2.0",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "mongoose": "^5.9.2"
   },
   "devDependencies": {
     "@types/express": "^4.17.2",

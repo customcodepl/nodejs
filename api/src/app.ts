@@ -1,13 +1,15 @@
 import express, { urlencoded, Request, Response } from 'express';
-import { resolve } from 'path';
-import { config } from 'dotenv';
+import databaseService from './services/databaseService';
+import config from './config';
 
 import apiRoute from './routes/api';
 
-config({ path: resolve(__dirname, "../.env") });
-
 const app = express();
-const port = process.env.API_PORT;
+const port = config.API_PORT;
+
+databaseService.catch(err => {
+    process.exit(1);
+});
 
 app.use(urlencoded({ extended: true }));
 
